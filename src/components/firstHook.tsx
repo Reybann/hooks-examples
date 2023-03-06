@@ -1,6 +1,8 @@
 // useState approach
 import './firstHook.css';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../context/userContext';
+
 
 function FirstHook() {
   const [count, setCount] = useState(0);
@@ -12,6 +14,10 @@ function FirstHook() {
   function handleSubtraction() {
     setCount(count - 1);
   }
+
+  const info = useContext( UserContext );
+  console.log(info);
+  
 
   return (
     <div className='firstHookBox'>

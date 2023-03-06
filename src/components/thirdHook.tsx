@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
+import { UserContext } from '../context/userContext';
 import './thirdHook.css'
 
 function ThirdComponent() {
@@ -9,6 +10,9 @@ function ThirdComponent() {
     console.log('Sum calculated!');
     return number1 + number2;
   }, [number1, number2]);
+
+  const info = useContext( UserContext );
+  console.log(info);
 
   return (
     <div className='thirdHookBox'>
