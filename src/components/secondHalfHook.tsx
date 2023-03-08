@@ -36,7 +36,13 @@ function SecondHalfHook() {
 
   useEffect(() => {
     handleFetchData();
-  }, []);
+    return () => {
+      console.log('Cleanup function called');
+      if (intervalId !== null) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [intervalId]);
 
   const handleClick = () => {
     setLoading(true);
