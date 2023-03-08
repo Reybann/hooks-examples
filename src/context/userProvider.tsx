@@ -7,7 +7,7 @@ interface Props {
 
 export const UserProvider = ({ children }: Props) => {
   return (
-    <UserContext.Provider value={{ hola: 'Mundo' }}>
+    <UserContext.Provider value={{ message: 'Jose' }}>
       { children }
     </UserContext.Provider>
   )

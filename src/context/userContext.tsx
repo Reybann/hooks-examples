@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 interface UserContextType {
-    hola: string;
+    message: string;
   }
 
 export const UserContext = createContext<UserContextType | null>(null);

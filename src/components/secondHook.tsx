@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './secondHook.css'
+import './secondHook.css';
 
 interface Todo {
   userId: number;
@@ -17,24 +17,30 @@ function SecondHook() {
 
   const handleFetchData = async () => {
     try {
-        setLoading(true);
-        const result = await axios.get<Todo>(
-          'https://jsonplaceholder.typicode.com/todos/3'
-        );
-        setData(result.data);
-        setLoading(false);
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          setError(error);
-        } else {
-          setError(null);
-        }
-        setLoading(false);
-      }      
+      setLoading(true);
+      const result = await axios.get<Todo>(
+        'https://jsonplaceholder.typicode.com/todos/1'
+      );
+      console.log('API CALLED');
+      setData(result.data);
+      setLoading(false);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error);
+      } else {
+        setError(null);
+      }
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     handleFetchData();
+    return () => {
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+    };
   }, []);
 
   const handleClick = () => {
@@ -47,20 +53,8 @@ function SecondHook() {
     setTimerId(id);
   };
 
-  const handleStopClick = () => {
-    setLoading(false);
-    setError(null);
-    setData(null);
-    if (timerId) {
-      clearTimeout(timerId);
-    }
-    setLoading(false);
-    setError(null);
-    setData(null);
-  };
-
   return (
-    <div className='secondHookBox'>
+    <div className="secondHookBox">
       {loading && <div>Loading...</div>}
       {error && <div>Error: {error.message}</div>}
       {data && (
@@ -70,7 +64,6 @@ function SecondHook() {
         </div>
       )}
       <button onClick={handleClick}>Fetch Data</button>
-      <button onClick={handleStopClick}>Stop</button>
     </div>
   );
 }
